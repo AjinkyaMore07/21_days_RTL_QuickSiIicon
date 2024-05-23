@@ -1,0 +1,19 @@
+// Simple shift register
+module day6(
+  input     wire        clk,
+  input     wire        reset,
+  input     wire        x_i,      // Serial input
+
+  output    wire[3:0]   sr_o
+);
+  logic [3:0] temp;
+  // Write your logic here...
+  always_ff @(posedge clk)
+    begin
+      if(reset)
+        temp<=0;
+      else
+        temp <={x_i,temp[2:0]};
+    end
+ assign sr_o = temp;
+endmodule
