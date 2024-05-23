@@ -1,0 +1,21 @@
+module day12 (
+  input     wire        clk,
+  input     wire        reset,
+  input     wire        x_i,
+
+  output    wire        det_o
+);
+	
+  reg [11:0] store;
+  // Write your logic here...
+
+  always_ff @(posedge clk)
+    begin
+      if(reset)
+        	store<=0;
+      else
+        	store <= store >> x_i;
+    end
+  
+  assign det_o = (store == 'b1110_1101_1011)?1:0;
+endmodule
