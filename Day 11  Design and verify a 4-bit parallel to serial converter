@@ -1,0 +1,39 @@
+// Parallel to serial with valid and empty
+
+module day11 (
+  input     wire      clk,
+  input     wire      reset,
+
+  output    wire      empty_o,
+  input     wire[3:0] parallel_i,
+  
+  output    wire      serial_o,
+  output    wire      valid_o
+);
+reg s;
+  // Write your logic here...
+ logic [1:0]count;
+  always_ff @(posedge clk)
+    begin
+      if(reset)
+        count<=0;
+      else
+        count <= count +1 ;
+    end
+  
+  always_ff @(posedge clk)
+    begin
+      if(reset)
+        s<=0;
+      else
+        case(count)
+          2'b00 : s <=  parallel_i[0];
+          2'b01 : s <=  parallel_i[1];
+          2'b10 : s <=  parallel_i[2];
+          2'b11 : s <=  parallel_i[3];
+        endcase
+    end
+assign serial_o=s;
+  assign empty_o = parallel_i[3] ? 1:0;
+  assign valid_o = |count ?1 :0;
+endmodule
