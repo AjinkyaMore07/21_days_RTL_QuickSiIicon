@@ -1,0 +1,36 @@
+// Binary to one-hot
+
+module day8#(
+  parameter BIN_W       = 4,
+  parameter ONE_HOT_W   = 16
+)(
+  input   wire[BIN_W-1:0]     bin_i,
+  output  wire[ONE_HOT_W-1:0] one_hot_o
+);
+
+  // Write your logic here...
+  logic [15:0]temp;
+  always_comb 
+    begin
+      case(bin_i)
+        4'h0 : temp = 'b0000_0000_0000_0001;
+        4'h1 : temp = 'b0000_0000_0000_0010;
+        4'h2 : temp = 'b0000_0000_0000_0100;
+        4'h3 : temp = 'b0000_0000_0000_1000;
+        4'h4 : temp = 'b0000_0000_0001_0000;
+        4'h5 : temp = 'b0000_0000_0010_0000;
+        4'h6 : temp = 'b0000_0000_0100_0000;
+        4'h7 : temp = 'b0000_0000_1000_0000;
+        4'h8 : temp = 'b0000_0001_0000_0000;
+        4'h9 : temp = 'b0000_0010_0010_0000;
+        4'hA : temp = 'b0000_0100_0010_0000;
+        4'hB : temp = 'b0000_1000_0010_0000; 
+        4'hC : temp = 'b0001_0000_0010_0000;
+        4'hD : temp = 'b0010_0000_0010_0000;
+        4'hE : temp = 'b0100_0000_0010_0000;
+        4'hF : temp = 'b1000_0000_0010_0000;
+       default : temp = 'b0000_0000_0000_0000;
+      endcase
+    end
+  assign one_hot_o = temp;
+endmodule
