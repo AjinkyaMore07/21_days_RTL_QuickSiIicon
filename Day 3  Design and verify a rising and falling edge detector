@@ -1,0 +1,28 @@
+ // An edge detector
+
+module day3 (
+  input     wire    clk,
+  input     wire    reset,
+
+  input     wire    a_i,
+
+  output    wire    rising_edge_o,
+  output    wire    falling_edge_o
+);
+
+  reg temp;
+  // Write your logic here...
+  always_ff @(posedge clk)
+    begin
+      if(reset)
+        tempR<=0;
+      else
+        tempR<=a_i;
+    end
+  
+  assign rising_edge_o = (a_i & (~temp));
+  
+  assign rising_edge_o = (~a_i & (temp));
+  
+  
+endmodule
