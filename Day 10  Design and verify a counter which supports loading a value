@@ -1,0 +1,25 @@
+// Counter with a load
+module day10 (
+  input     wire          clk,
+  input     wire          reset,
+  input     wire          load_i,
+  input     wire[3:0]     load_val_i,
+
+  output    wire[3:0]     count_o
+);
+  logic [3:0] temp;
+  // Write your logic here...
+  always_ff @(posedge clk)
+    begin
+      if(reset)
+        temp<=0;
+      else
+        begin
+          if(load_i)
+            temp<=load_val_i;
+          else
+            temp<=temp+1;
+        end
+    end
+  assign count_o = temp;
+endmodule
