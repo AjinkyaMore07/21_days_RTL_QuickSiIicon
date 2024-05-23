@@ -1,0 +1,20 @@
+// LFSR
+module day7 (
+  input     wire      clk,
+  input     wire      reset,
+
+  output    wire[3:0] lfsr_o
+);
+
+  // Write your logic here...
+  logic [3:0]temp;
+  always_ff @(posedge clk)
+    begin
+      if(reset)
+        temp<=0;
+      else
+        temp[0] <= (temp[1] ^ temp[0]);
+        
+    end
+  assign lfsr_o = temp;
+endmodule
