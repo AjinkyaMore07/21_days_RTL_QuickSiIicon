@@ -1,0 +1,23 @@
+// Priority arbiter
+// port[0] - highest priority
+
+module day14 #(
+  parameter NUM_PORTS = 4
+)(
+    input       wire[NUM_PORTS-1:0] req_i,
+    output      wire[NUM_PORTS-1:0] gnt_o   // One-hot grant signal
+);
+  reg [3:0] temp;
+  // Write your logic here...
+  always @(*)
+    begin
+      case(req_i)
+        4'd0 : temp = 4'b0001;
+        4'd1 : temp = 4'b0010;
+        4'd2 : temp = 4'b0100;
+        4'd3 : temp = 4'b1000;
+        default : temp = 4'b0001;
+      endcase
+    end
+ assign gnt_o = temp; 
+endmodule
